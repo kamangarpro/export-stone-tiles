@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'fa' }}" dir="{{ page.dir | default: 'rtl' }}" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'stone-dark': '#1c1917',
+            'stone-gold': '#d4af37',
+            'stone-light': '#f5f5f4',
+          },
+          fontFamily: {
+            sans: ['Tahoma', 'Arial', 'sans-serif'], // Simple fallback for now
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-gray-800 flex flex-col min-h-screen">
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-stone-200">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="{{ site.baseurl }}/{% if page.lang == 'ar' %}ar/{% endif %}" class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-stone-800 text-stone-gold flex items-center justify-center rounded-lg">
+          <i class="fa-solid fa-layer-group text-2xl"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-stone-800">Expro<span class="text-yellow-600">Stone</span></span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex gap-6 items-center text-sm font-medium text-gray-600">
+        <a href="#products" class="hover:text-yellow-600 transition-colors">{% if page.lang == 'ar' %}المنتجات{% else %}محصولات{% endif %}</a>
+        <a href="#about" class="hover:text-yellow-600 transition-colors">{% if page.lang == 'ar' %}من نحن{% else %}درباره ما{% endif %}</a>
+        <a href="#contact" class="hover:text-yellow-600 transition-colors">{% if page.lang == 'ar' %}اتصل بنا{% else %}تماس با ما{% endif %}</a>
+      </nav>
+
+      <!-- Language Switcher & CTA -->
+      <div class="flex items-center gap-3">
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-sm font-medium hover:text-yellow-600">
+            <i class="fa-solid fa-globe"></i> 
+            <span>{{ page.lang | upcase }}</span>
+          </button>
+          <div class="absolute top-full left-0 mt-2 w-32 bg-white shadow-lg rounded-md overflow-hidden hidden group-hover:block border border-gray-100">
+            <a href="{{ site.baseurl }}/" class="block px-4 py-2 hover:bg-gray-50 text-sm text-right">فارسی</a>
+            <a href="{{ site.baseurl }}/ar/" class="block px-4 py-2 hover:bg-gray-50 text-sm text-right">العربية</a>
+            <a href="{{ site.baseurl }}/ku/" class="block px-4 py-2 hover:bg-gray-50 text-sm text-right">کوردی</a>
+            <a href="{{ site.baseurl }}/en/" class="block px-4 py-2 hover:bg-gray-50 text-sm text-left">English</a>
+          </div>
+        </div>
+        <a href="https://wa.me/989123456789" class="bg-yellow-600 text-white px-4 py-2 rounded-md text-sm font-bold hover:bg-yellow-700 transition shadow-sm hidden sm:block">
+          {% if page.lang == 'ar' %}طلب عرض سعر{% else %}درخواست قیمت{% endif %}
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+    {{ content }}
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-stone-900 text-stone-300 py-12 mt-12 border-t-4 border-yellow-600">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Brand -->
+      <div class="space-y-4">
+        <div class="text-2xl font-bold text-white flex items-center gap-2">
+           <i class="fa-solid fa-layer-group text-yellow-500"></i> ExproStone
+        </div>
+        <p class="text-sm leading-relaxed opacity-80">
+          {% if page.lang == 'ar' %}
+          شريكك الموثوق في تصدير أحجار البناء الفاخرة والبلاط والصلب إلى العراق والكويت.
+          {% else %}
+          شریک مطمئن شما در صادرات سنگ‌های ساختمانی لوکس، کاشی و سرامیک و فولاد به عراق و کویت.
+          {% endif %}
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-white font-bold mb-4">{% if page.lang == 'ar' %}روابط سريعة{% else %}دسترسی سریع{% endif %}</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-yellow-500 transition">Tiles (Kashi)</a></li>
+          <li><a href="#" class="hover:text-yellow-500 transition">Travertine Stone</a></li>
+          <li><a href="#" class="hover:text-yellow-500 transition">Steel Rebar</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-white font-bold mb-4">{% if page.lang == 'ar' %}معلومات الاتصال{% else %}اطلاعات تماس{% endif %}</h3>
+        <ul class="space-y-2 text-sm">
+          <li class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-green-500"></i> +98 912 345 6789</li>
+          <li class="flex items-center gap-2"><i class="fa-regular fa-envelope text-yellow-500"></i> export@exprostone.com</li>
+          <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-red-500"></i> Isfahan, Iran</li>
+        </ul>
+      </div>
+
+      <!-- Newsletter/Trust -->
+      <div>
+        <h3 class="text-white font-bold mb-4">{% if page.lang == 'ar' %}ضمان الجودة{% else %}تضیمن کیفیت{% endif %}</h3>
+        <div class="flex gap-2 text-2xl text-gray-400">
+          <i class="fa-solid fa-certificate hover:text-yellow-500 cursor-pointer"></i>
+          <i class="fa-solid fa-shield-halved hover:text-yellow-500 cursor-pointer"></i>
+          <i class="fa-solid fa-truck-fast hover:text-yellow-500 cursor-pointer"></i>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-xs text-stone-600 mt-12 pt-8 border-t border-stone-800">
+      &copy; {{ site.time | date: '%Y' }} ExproStone. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/989123456789" class="fixed bottom-6 {% if page.dir == 'rtl' %}left-6{% else %}right-6{% endif %} z-50 bg-green-500 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-3xl hover:bg-green-600 hover:scale-110 transition-all animate-bounce">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+</body>
+</html>
